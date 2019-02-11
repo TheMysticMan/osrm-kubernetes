@@ -1,8 +1,8 @@
 const { events, Job, Group } = require("brigadier");
 
 const shareFolder = "/mnt/brigade/share";
-const areaName = "gelderland";
-const downloadUrl = `europe/netherlands/${areaName}-latest.osm.pbf`;
+const areaName = "netherlands";
+const downloadUrl = `europe/${areaName}-latest.osm.pbf`;
 const pbfFilePath = `${shareFolder}/${areaName}-latest.osm.pbf`;
 const osrmFilePath = `${shareFolder}/${areaName}-latest.osrm`;
 
