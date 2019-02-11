@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: copy-osrm-data-$BUILD_ID
+  labels:
+    app: copy-osrm-data-$BUILD_ID
+spec:
+  containers:
+  - name: copy-osrm-data-$BUILD_ID
+    image: alpine
+    command: ["cp"]
+    args: ["-f", "/data/worker/*", "/data/osrm/" ]
+    volumeMounts:
+    - name: copy-osrm-data-$BUILD_ID-nfs-volume
+      mountPath: /data/worker
+    - name: osrm-data-$BUILD_ID-nfs-volume
+      mountPath: /data/osrm
+  restartPolicy: Never
+  volumes:
+  - name: copy-osrm-data-$BUILD_ID-nfs-volume
+    persistentVolumeClaim:
+      claimName: brigade-worker-$BUILD_ID
+  - name: osrm-data-$BUILD_ID-nfs-volume
+    persistentVolumeClaim:
+      claimName: nfs
