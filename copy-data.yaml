@@ -9,7 +9,7 @@ spec:
   - name: copy-osrm-data-$BUILD_ID
     image: alpine
     command: ["cp"]
-    args: ["-f", "/data/worker/*", "/data/osrm/" ]
+    args: ["-f", "-a", "/data/worker/.", "/data/osrm/" ]
     volumeMounts:
     - name: copy-osrm-data-$BUILD_ID-nfs-volume
       mountPath: /data/worker
