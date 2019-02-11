@@ -19,7 +19,8 @@ const jobs = {
             `osrm-extract -p /opt/car.lua ${pbfFilePath}`,
             `osrm-partition ${osrmFilePath}`,
             `osrm-customize ${osrmFilePath}`
-        ]
+        ];
+        return job;
     },
 
     copyOsrmData: (e,p,env) => {
