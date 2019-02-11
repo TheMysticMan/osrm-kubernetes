@@ -15,6 +15,7 @@ spec:
       mountPath: /data/worker
     - name: osrm-data-$BUILD_ID-nfs-volume
       mountPath: /data/osrm
+      subPath: /osrm
   restartPolicy: Never
   volumes:
   - name: copy-osrm-data-$BUILD_ID-nfs-volume
