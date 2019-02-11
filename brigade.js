@@ -26,6 +26,7 @@ const jobs = {
     importData: (e, p) => {
         const job = new Job("import-osrm-data", "osrm/osrm-backend");
         job.storage.enabled = true;
+        job.timeout = 21600000;
         job.tasks = [
             `apt update && apt install curl -y`,
             `curl http://download.geofabrik.de/${downloadUrl} -o ${pbfFilePath}`,
