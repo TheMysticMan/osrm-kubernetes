@@ -32,7 +32,8 @@ const jobs = {
             `curl http://download.geofabrik.de/${downloadUrl} -o ${pbfFilePath}`,
             `osrm-extract -p /opt/car.lua ${pbfFilePath}`,
             `osrm-partition ${osrmFilePath}`,
-            `osrm-customize ${osrmFilePath}`
+            `osrm-customize ${osrmFilePath}`,
+            'echo done'
         ];
         return job;
     },

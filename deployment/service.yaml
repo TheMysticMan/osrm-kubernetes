@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: osrm
+  labels:
+    app: osrm
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: osrm
+    version: "$VERSION"
