@@ -23,7 +23,7 @@ spec:
         command: ["/bin/sh","-c"]
         args: ["cp -a /nfs-share/. /data; osrm-routed --algorithm mld /data/netherlands-latest.osrm"]
         ports:
-        - containerPort: 80
+        - containerPort: 5000
         volumeMounts:
         - name: osrm-$VERSION-volume
           mountPath: /nfs-share

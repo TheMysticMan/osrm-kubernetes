@@ -7,11 +7,11 @@ then
     DELETE_EXISTING=true
 else
     echo "tileserver service doesn't exist. Creating it now."
-    cat /src/deployment/service.yaml |  sed 's/\$VERSION/'"$BUILD_ID"'/g' | kubectl create -f -
+    cat ./deployment/service.yaml |  sed 's/\$VERSION/'"$BUILD_ID"'/g' | kubectl create -f -
 fi
 
 export BlueVersion=$(kubectl get service osrm -o=jsonpath='{.spec.selector.version}') #find deployed version
-cat /src/deployment/osrm.yaml | sed 's/\$VERSION/'"$BUILD_ID"'/g' | kubectl create -f - #Deploy new version
+cat ./deployment/osrm.yaml | sed 's/\$VERSION/'"$BUILD_ID"'/g' | kubectl create -f - #Deploy new version
 kubectl rollout status deployment/osrm-$BUILD_ID-deployment #Health Check
 kubectl get service osrm -o=yaml | sed -e "s/$BlueVersion/$BUILD_ID/g" | kubectl apply -f - #Update Service YAML with Green version
 

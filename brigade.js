@@ -11,7 +11,8 @@ events.on('exec', (e, p) => {
         Group.runEach(
             [
                 jobs.importData(e, p),
-                jobs.copyOsrmData(e, p)
+                jobs.copyOsrmData(e, p),
+                jobs.deployNewVersion(e, p)
             ])
             .catch((err) => {
                 console.log(err);
@@ -50,5 +51,19 @@ const jobs = {
         ];
 
         return copyJob;
+    },
+
+    deployNewVersion: (e, p) => {
+        const deployJob = new Job('kubectl-deploy-osrm', 'lachlanevenson/k8s-kubectl');
+        deployJob.storage.enabled = true;
+        deployJob.env = {
+            BUILD_ID: e.buildID
+        }
+
+        deployJob.tasks = [
+            `sh /src/deployment/deploy.sh`
+        ];
+
+        return deployJob;
     }
 }
